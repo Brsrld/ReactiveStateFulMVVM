@@ -7,7 +7,6 @@
 
 import Foundation
 import Alamofire
-import Combine
 
 protocol ServiceGenerator {
     func fetchCharacters(req: NetworkRequest) -> AnyPublisher<Characters, NetworkError>

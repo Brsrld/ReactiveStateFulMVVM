@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import Alamofire
 
 final class ServiceManager {
     public static let shared: ServiceManager = ServiceManager()
