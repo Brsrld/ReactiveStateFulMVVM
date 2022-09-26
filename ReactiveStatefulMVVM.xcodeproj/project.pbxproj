@@ -16,6 +16,15 @@
 		550C4DAF28E1AF9B0002DDC4 /* ReactiveStatefulMVVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550C4DAE28E1AF9B0002DDC4 /* ReactiveStatefulMVVMTests.swift */; };
 		550C4DB928E1AF9B0002DDC4 /* ReactiveStatefulMVVMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550C4DB828E1AF9B0002DDC4 /* ReactiveStatefulMVVMUITests.swift */; };
 		550C4DBB28E1AF9B0002DDC4 /* ReactiveStatefulMVVMUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550C4DBA28E1AF9B0002DDC4 /* ReactiveStatefulMVVMUITestsLaunchTests.swift */; };
+		550C4DCA28E1AFD60002DDC4 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550C4DC928E1AFD60002DDC4 /* ServiceManager.swift */; };
+		550C4DD128E1B3610002DDC4 /* RickAndMortyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550C4DD028E1B3610002DDC4 /* RickAndMortyModel.swift */; };
+		550C4DD528E1B67E0002DDC4 /* ServiceGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550C4DD428E1B67E0002DDC4 /* ServiceGenerator.swift */; };
+		550C4DD728E1C2300002DDC4 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550C4DD628E1C2300002DDC4 /* NetworkRequest.swift */; };
+		550C4DDB28E1C7BA0002DDC4 /* CharacterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550C4DD928E1C7BA0002DDC4 /* CharacterListViewController.swift */; };
+		550C4DDC28E1C7BA0002DDC4 /* CharacterListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 550C4DDA28E1C7BA0002DDC4 /* CharacterListViewController.xib */; };
+		550C4DDE28E1C8010002DDC4 /* CharacterListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550C4DDD28E1C8010002DDC4 /* CharacterListState.swift */; };
+		550C4DE028E1C80E0002DDC4 /* CharacterListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550C4DDF28E1C80E0002DDC4 /* CharacterListCoordinator.swift */; };
+		550C4DE328E1C8230002DDC4 /* CharacterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550C4DE228E1C8230002DDC4 /* CharacterListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +58,15 @@
 		550C4DB428E1AF9B0002DDC4 /* ReactiveStatefulMVVMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveStatefulMVVMUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		550C4DB828E1AF9B0002DDC4 /* ReactiveStatefulMVVMUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveStatefulMVVMUITests.swift; sourceTree = "<group>"; };
 		550C4DBA28E1AF9B0002DDC4 /* ReactiveStatefulMVVMUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveStatefulMVVMUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		550C4DC928E1AFD60002DDC4 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
+		550C4DD028E1B3610002DDC4 /* RickAndMortyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RickAndMortyModel.swift; sourceTree = "<group>"; };
+		550C4DD428E1B67E0002DDC4 /* ServiceGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceGenerator.swift; sourceTree = "<group>"; };
+		550C4DD628E1C2300002DDC4 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		550C4DD928E1C7BA0002DDC4 /* CharacterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewController.swift; sourceTree = "<group>"; };
+		550C4DDA28E1C7BA0002DDC4 /* CharacterListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterListViewController.xib; sourceTree = "<group>"; };
+		550C4DDD28E1C8010002DDC4 /* CharacterListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListState.swift; sourceTree = "<group>"; };
+		550C4DDF28E1C80E0002DDC4 /* CharacterListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListCoordinator.swift; sourceTree = "<group>"; };
+		550C4DE228E1C8230002DDC4 /* CharacterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,12 +117,10 @@
 		550C4D9628E1AF9A0002DDC4 /* ReactiveStatefulMVVM */ = {
 			isa = PBXGroup;
 			children = (
-				550C4D9728E1AF9A0002DDC4 /* AppDelegate.swift */,
-				550C4D9928E1AF9A0002DDC4 /* SceneDelegate.swift */,
-				550C4D9B28E1AF9A0002DDC4 /* ViewController.swift */,
-				550C4D9D28E1AF9A0002DDC4 /* Main.storyboard */,
+				550C4DD828E1C76A0002DDC4 /* Screens */,
+				550C4DC828E1AFBF0002DDC4 /* Network */,
+				550C4DC728E1AFAA0002DDC4 /* Core */,
 				550C4DA028E1AF9B0002DDC4 /* Assets.xcassets */,
-				550C4DA228E1AF9B0002DDC4 /* LaunchScreen.storyboard */,
 				550C4DA528E1AF9B0002DDC4 /* Info.plist */,
 			);
 			path = ReactiveStatefulMVVM;
@@ -127,6 +143,73 @@
 			path = ReactiveStatefulMVVMUITests;
 			sourceTree = "<group>";
 		};
+		550C4DC728E1AFAA0002DDC4 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				550C4DE428E1C83C0002DDC4 /* BaseFiles */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		550C4DC828E1AFBF0002DDC4 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				550C4DCF28E1B34B0002DDC4 /* Model */,
+				550C4DCE28E1B33A0002DDC4 /* Service */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		550C4DCE28E1B33A0002DDC4 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				550C4DC928E1AFD60002DDC4 /* ServiceManager.swift */,
+				550C4DD428E1B67E0002DDC4 /* ServiceGenerator.swift */,
+				550C4DD628E1C2300002DDC4 /* NetworkRequest.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		550C4DCF28E1B34B0002DDC4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				550C4DD028E1B3610002DDC4 /* RickAndMortyModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		550C4DD828E1C76A0002DDC4 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				550C4DF328E1CA1C0002DDC4 /* CharacterList */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		550C4DE428E1C83C0002DDC4 /* BaseFiles */ = {
+			isa = PBXGroup;
+			children = (
+				550C4DA228E1AF9B0002DDC4 /* LaunchScreen.storyboard */,
+				550C4D9D28E1AF9A0002DDC4 /* Main.storyboard */,
+				550C4D9728E1AF9A0002DDC4 /* AppDelegate.swift */,
+				550C4D9928E1AF9A0002DDC4 /* SceneDelegate.swift */,
+				550C4D9B28E1AF9A0002DDC4 /* ViewController.swift */,
+			);
+			path = BaseFiles;
+			sourceTree = "<group>";
+		};
+		550C4DF328E1CA1C0002DDC4 /* CharacterList */ = {
+			isa = PBXGroup;
+			children = (
+				550C4DD928E1C7BA0002DDC4 /* CharacterListViewController.swift */,
+				550C4DDA28E1C7BA0002DDC4 /* CharacterListViewController.xib */,
+				550C4DDD28E1C8010002DDC4 /* CharacterListState.swift */,
+				550C4DDF28E1C80E0002DDC4 /* CharacterListCoordinator.swift */,
+				550C4DE228E1C8230002DDC4 /* CharacterListViewModel.swift */,
+			);
+			path = CharacterList;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +226,8 @@
 			dependencies = (
 			);
 			name = ReactiveStatefulMVVM;
+			packageProductDependencies = (
+			);
 			productName = ReactiveStatefulMVVM;
 			productReference = 550C4D9428E1AF9A0002DDC4 /* ReactiveStatefulMVVM.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +300,8 @@
 				Base,
 			);
 			mainGroup = 550C4D8B28E1AF9A0002DDC4;
+			packageReferences = (
+			);
 			productRefGroup = 550C4D9528E1AF9A0002DDC4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -231,6 +318,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550C4DDC28E1C7BA0002DDC4 /* CharacterListViewController.xib in Resources */,
 				550C4DA428E1AF9B0002DDC4 /* LaunchScreen.storyboard in Resources */,
 				550C4DA128E1AF9B0002DDC4 /* Assets.xcassets in Resources */,
 				550C4D9F28E1AF9A0002DDC4 /* Main.storyboard in Resources */,
@@ -258,9 +346,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550C4DD128E1B3610002DDC4 /* RickAndMortyModel.swift in Sources */,
+				550C4DE328E1C8230002DDC4 /* CharacterListViewModel.swift in Sources */,
+				550C4DDE28E1C8010002DDC4 /* CharacterListState.swift in Sources */,
 				550C4D9C28E1AF9A0002DDC4 /* ViewController.swift in Sources */,
+				550C4DD728E1C2300002DDC4 /* NetworkRequest.swift in Sources */,
 				550C4D9828E1AF9A0002DDC4 /* AppDelegate.swift in Sources */,
+				550C4DDB28E1C7BA0002DDC4 /* CharacterListViewController.swift in Sources */,
+				550C4DD528E1B67E0002DDC4 /* ServiceGenerator.swift in Sources */,
 				550C4D9A28E1AF9A0002DDC4 /* SceneDelegate.swift in Sources */,
+				550C4DE028E1C80E0002DDC4 /* CharacterListCoordinator.swift in Sources */,
+				550C4DCA28E1AFD60002DDC4 /* ServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
