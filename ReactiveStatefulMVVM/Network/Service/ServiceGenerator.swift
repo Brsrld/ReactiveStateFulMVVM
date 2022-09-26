@@ -6,14 +6,20 @@
 //
 
 import Foundation
-import Alamofire
+import Combine
 
 protocol ServiceGenerator {
     func fetchCharacters(req: NetworkRequest) -> AnyPublisher<Characters, NetworkError>
 }
 
 final class Services: ServiceGenerator {
+    let service: Service
+    
+    init(service:Service) {
+        self.service = ServiceManager()
+    }
+    
     func fetchCharacters(req: NetworkRequest) -> AnyPublisher<Characters, NetworkError> {
-        return ServiceManager.shared.request(req)
+        return service.request(req)
     }
 }

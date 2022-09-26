@@ -146,6 +146,7 @@
 		550C4DC728E1AFAA0002DDC4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				5581F46128E23BC90046737A /* Coordinator */,
 				550C4DE428E1C83C0002DDC4 /* BaseFiles */,
 			);
 			path = Core;
@@ -208,6 +209,13 @@
 				550C4DE228E1C8230002DDC4 /* CharacterListViewModel.swift */,
 			);
 			path = CharacterList;
+			sourceTree = "<group>";
+		};
+		5581F46128E23BC90046737A /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

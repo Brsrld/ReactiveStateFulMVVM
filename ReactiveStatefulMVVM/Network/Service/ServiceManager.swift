@@ -8,13 +8,13 @@
 import Foundation
 import Combine
 
-final class ServiceManager {
-    public static let shared: ServiceManager = ServiceManager()
-    private init () {}
+protocol Service {
+    func request<T>(_ req: NetworkRequest) -> AnyPublisher<T, NetworkError>
+    where T: Decodable, T: Encodable
 }
 
-extension ServiceManager {
-    public func request<T>(_ req: NetworkRequest) -> AnyPublisher<T, NetworkError>
+final class ServiceManager: Service {
+    func request<T>(_ req: NetworkRequest) -> AnyPublisher<T, NetworkError>
     where T: Decodable, T: Encodable {
         let sessionConfig = URLSessionConfiguration.default
         sessionConfig.timeoutIntervalForRequest = TimeInterval(req.requestTimeOut ?? 20)
