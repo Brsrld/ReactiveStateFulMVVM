@@ -8,19 +8,28 @@
 import Foundation
 
 // MARK: - Characters
-struct Characters: Codable {
+struct Characters: Codable,Hashable {
     let info: Info?
     let results: [Result]?
+    
+    static func == (lhs: Characters, rhs: Characters) -> Bool {
+        return lhs.results == rhs.results && lhs.info == rhs.info
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(results)
+        hasher.combine(info)
+    }
 }
 
 // MARK: - Info
-struct Info: Codable {
+struct Info: Codable,Hashable {
     let count, pages: Int?
     let next: String?
 }
 
 // MARK: - Result
-struct Result: Codable {
+struct Result: Codable,Hashable {
     let id: Int?
     let name: String?
     let status: Status?
@@ -32,6 +41,13 @@ struct Result: Codable {
     let episode: [String]?
     let url: String?
     let created: String?
+    
+    static func == (lhs: Result, rhs: Result) -> Bool {
+        return lhs.id == rhs.id
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
 
 enum Gender: String, Codable {

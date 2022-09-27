@@ -10,21 +10,30 @@ import Combine
 
 class CharacterListViewController: UIViewController {
     
+    @IBOutlet var collectionView: UICollectionView!
+    
     public var viewModel: CharacterListViewModel!
     private var bindings = Set<AnyCancellable>()
-    //private var feedCollectionDataManager: FeedCollectionDataManager?
+    private var characterCollectionViewDataModel: CharacterCollectionViewDataModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.getLaunches()
+        setUpCollectionView()
+        configureDataSource()
         setUpBinding()
+    }
+    
+    private func setUpCollectionView() {
+        collectionView.register(CharacterListCollectionViewCell.self,
+                                            forCellWithReuseIdentifier: CharacterListCollectionViewCell.reuseIdentifier)
     }
     
     private func setUpBinding() {
         viewModel.$characters
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
-                print(self?.viewModel.characters)
+                self?.characterCollectionViewDataModel?.updateSections(characters: self?.viewModel.characters)
             }
             .store(in: &bindings)
         
@@ -33,7 +42,7 @@ class CharacterListViewController: UIViewController {
             case .loading:
                 print("Loading")
             case .finishedLoading:
-                print("finishedLoading")
+                self?.collectionView.backgroundColor = .red
             case .error(let errorString):
                 print("finishedLoading")
             case .ready:
@@ -46,4 +55,13 @@ class CharacterListViewController: UIViewController {
             .store(in: &bindings)
         
     }
+    
+    private func configureDataSource() {
+        characterCollectionViewDataModel = CharacterCollectionViewDataModel(
+            collectionView: collectionView,
+            output: self.viewModel
+        )
+        characterCollectionViewDataModel?.configure()
+    }
 }
+

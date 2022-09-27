@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 
+
 final class CharacterListViewModel: ObservableObject {
     
     private let service: ServiceGeneratorProtocol
@@ -15,6 +16,8 @@ final class CharacterListViewModel: ObservableObject {
     
     @Published private(set) var characters: Characters?
     @Published private(set) var state: CharacterListState = .ready
+    
+    enum Section { case character }
     
     init(service: ServiceGeneratorProtocol) {
         self.service = service
@@ -38,3 +41,19 @@ final class CharacterListViewModel: ObservableObject {
             .store(in: &bindings)
     }
 }
+
+extension CharacterListViewModel: CharacterCollectionViewDataModelOutput {
+    func onDidSelect(indexPath: IndexPath) {
+        //        coordinator?.eventOccurred(with: .goToDetail,
+        //                                   item: self.launchs[indexPath.item])
+    }
+    
+    func onWillDisplay(indexPath: IndexPath) {
+        //        if indexPath.item == (launchs.count - Constant.LastItemCountofStartPagination)
+        //            && !isPaginating {
+        //            self.offset += launchs.count
+        //            getLaunches()
+        //            self.isPaginating = true
+    }
+}
+
