@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+public enum CharacterListState: Equatable {
+    case loading
+    case ready
+    case finishedLoading
+    case error(String)
+}

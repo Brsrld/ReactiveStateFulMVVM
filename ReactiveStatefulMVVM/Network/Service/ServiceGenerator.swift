@@ -8,14 +8,14 @@
 import Foundation
 import Combine
 
-protocol ServiceGenerator {
+protocol ServiceGeneratorProtocol {
     func fetchCharacters(req: NetworkRequest) -> AnyPublisher<Characters, NetworkError>
 }
 
-final class Services: ServiceGenerator {
-    let service: Service
+final class ServiceGenerator: ServiceGeneratorProtocol {
+    let service: ServiceManagerProtocol
     
-    init(service:Service) {
+    init() {
         self.service = ServiceManager()
     }
     

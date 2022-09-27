@@ -8,12 +8,12 @@
 import Foundation
 import Combine
 
-protocol Service {
+protocol ServiceManagerProtocol {
     func request<T>(_ req: NetworkRequest) -> AnyPublisher<T, NetworkError>
     where T: Decodable, T: Encodable
 }
 
-final class ServiceManager: Service {
+final class ServiceManager: ServiceManagerProtocol {
     func request<T>(_ req: NetworkRequest) -> AnyPublisher<T, NetworkError>
     where T: Decodable, T: Encodable {
         let sessionConfig = URLSessionConfiguration.default
