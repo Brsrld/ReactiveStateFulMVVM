@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// MARK: UIViewConroller
 extension UIViewController {
     func showError(_ error: String) {
         let alertController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)

@@ -7,4 +7,5 @@
 
 import UIKit
 
+// MARK: CollectionViewCell
 extension UICollectionViewCell: Reusable {}

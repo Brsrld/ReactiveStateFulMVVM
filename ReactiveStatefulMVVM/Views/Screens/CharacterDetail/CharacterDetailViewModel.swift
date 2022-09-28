@@ -10,9 +10,11 @@ import Combine
 
 
 final class CharacterDetailViewModel {
+    // MARK: Properties
     @Published private(set) var state: CharacterDetailState = .ready
     var characterDetail:Result
     
+    // MARK: Init
     init(characterDetail: Result) {
         self.characterDetail = characterDetail
     }

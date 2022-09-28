@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: Enums
 public enum HTTPMethod: String {
     case GET
     case POST
@@ -28,12 +29,14 @@ public enum NetworkError: Error, Equatable {
 
 
 public struct NetworkRequest {
+    // MARK: Properties
     let url: String
     let headers: [String: String]?
     let body: Data?
     let requestTimeOut: Float?
     let httpMethod: HTTPMethod
     
+    // MARK: Inits
     public init(url: String,
                 headers: [String: String]? = nil,
                 reqBody: Encodable? = nil,
@@ -60,6 +63,7 @@ public struct NetworkRequest {
         self.httpMethod = httpMethod
     }
     
+    // MARK: Functions
     func buildURLRequest(with url: URL) -> URLRequest {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = httpMethod.rawValue
@@ -69,7 +73,7 @@ public struct NetworkRequest {
     }
 }
 
-
+// MARK: Encodable
 extension Encodable {
     func encode() -> Data? {
         do {

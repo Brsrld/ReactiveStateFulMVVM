@@ -8,12 +8,8 @@
 import Foundation
 
 struct CharacterListCellViewModel {
-    
+    // MARK: Properties
     private let character: Result?
-    
-    init(character: Result) {
-        self.character = character
-    }
     
     var imageURl: URL? {
         return URL(string: character?.image ?? "")
@@ -34,5 +30,9 @@ struct CharacterListCellViewModel {
     var characterStatus: Status {
         return character?.status ?? .unknown
     }
-
+    
+    // MARK: Init
+    init(character: Result) {
+        self.character = character
+    }
 }

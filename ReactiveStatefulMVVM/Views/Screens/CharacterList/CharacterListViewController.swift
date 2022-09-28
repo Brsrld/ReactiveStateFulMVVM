@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class CharacterListViewController: UIViewController {
-    
+    // MARK: Properties
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet weak var indicatorView: UIView!
 
@@ -24,11 +24,7 @@ class CharacterListViewController: UIViewController {
         handleStates()
     }
     
-    private func setUpCollectionView() {
-        collectionView.register(UINib.init(nibName: Cells.characterListCollectionViewCell.rawValue, bundle: nil), forCellWithReuseIdentifier: Cells.characterListCollectionViewCell.rawValue)
-        collectionView.collectionViewLayout = createLayout()
-    }
-    
+    // MARK: States
     private func handleStates() {
         viewModel.$characters
             .receive(on: RunLoop.main)
@@ -56,6 +52,12 @@ class CharacterListViewController: UIViewController {
             .sink(receiveValue: stateValueHandler)
             .store(in: &bindings)
         
+    }
+    
+    // MARK: Functions
+    private func setUpCollectionView() {
+        collectionView.register(UINib.init(nibName: Cells.characterListCollectionViewCell.rawValue, bundle: nil), forCellWithReuseIdentifier: Cells.characterListCollectionViewCell.rawValue)
+        collectionView.collectionViewLayout = createLayout()
     }
     
     private func visibility(condition:Bool) {
@@ -99,6 +101,7 @@ class CharacterListViewController: UIViewController {
     }
 }
 
+// MARK: CharacterCollectionViewDataModelOutput
 extension CharacterListViewController:CharacterCollectionViewDataModelOutput {
     func onDidSelect(indexPath: IndexPath) {
         guard let item = self.viewModel.characters?.results?[indexPath.item] else { return }

@@ -10,7 +10,7 @@ import Combine
 import Kingfisher
 
 class CharacterDetailViewController: UIViewController {
-    
+    // MARK: Properties
     @IBOutlet weak var characterImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var speciesLabel: UILabel!
@@ -26,6 +26,7 @@ class CharacterDetailViewController: UIViewController {
         handleStates()
     }
     
+    // MARK: States
     private func handleStates() {
         let stateValueHandler: (CharacterDetailState) -> Void = { [weak self] state in
             switch state {
@@ -40,6 +41,7 @@ class CharacterDetailViewController: UIViewController {
         
     }
     
+    // MARK: Functions
     private func fillContent() {
         if let imageUrl = viewModel.characterDetail.image{
             characterImage.kf.setImage(with: URL(string: imageUrl))

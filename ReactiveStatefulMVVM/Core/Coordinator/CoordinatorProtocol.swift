@@ -7,10 +7,7 @@
 
 import UIKit
 
-enum Event {
-    case goToDetail
-}
-
+// MARK: Protocols
 protocol Coordinating {
     var coordinator: Coordinator? { get set }
 }

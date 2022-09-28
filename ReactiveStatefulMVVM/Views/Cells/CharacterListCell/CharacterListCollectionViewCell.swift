@@ -9,12 +9,13 @@ import UIKit
 import Kingfisher
 
 class CharacterListCollectionViewCell: UICollectionViewCell {
+    // MARK: Properties
     @IBOutlet weak var characterImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    
-    // MARK: Properties
+
     private var viewModel: CharacterListCellViewModel?
     
+    // MARK: Functions
     public override func awakeFromNib() {
         super.awakeFromNib()
     }

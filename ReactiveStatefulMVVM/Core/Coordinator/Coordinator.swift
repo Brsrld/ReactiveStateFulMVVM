@@ -15,7 +15,7 @@ class Coordinator: CoordinatorProtocol {
     var children: [CoordinatorProtocol] = []
     var navigationController: UINavigationController?
     
-    // MARK: Funcs
+    // MARK: Functions
     func start() {
         let vc = CharacterListBuilder.build(coordinator: self)
         navigationController?.setViewControllers([vc], animated: false)

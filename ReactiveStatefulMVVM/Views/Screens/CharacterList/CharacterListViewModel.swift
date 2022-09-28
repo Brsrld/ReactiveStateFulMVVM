@@ -10,22 +10,23 @@ import Combine
 
 
 final class CharacterListViewModel {
+    // MARK: Properties
     private let service: ServiceGeneratorProtocol
     private var bindings = Set<AnyCancellable>()
-    private var isPaginating = false
     
     @Published private(set) var characters: Characters?
     @Published private(set) var state: CharacterListState = .ready
     
     var coordinator: Coordinator?
-    
     enum Section { case character }
     
+    // MARK: Init
     init(service: ServiceGeneratorProtocol,coordinator: Coordinator?) {
         self.service = service
         self.coordinator = coordinator
     }
     
+    // MARK: Functions
     func initialize() {
         let request = NetworkRequest(url: ApiURLs.baseURL.rawValue, httpMethod: .GET)
         getCharacters(request: request)
@@ -37,7 +38,6 @@ final class CharacterListViewModel {
         if indexPath.item == (count - 1) {
             let request = NetworkRequest(url: url, httpMethod: .GET)
             getCharacters(request: request)
-            self.isPaginating = true
         }
     }
     
