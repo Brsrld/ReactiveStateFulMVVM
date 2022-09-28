@@ -17,13 +17,14 @@ class CharacterListViewController: UIViewController {
     private var bindings = Set<AnyCancellable>()
     private var characterCollectionViewDataModel: CharacterCollectionViewDataModel?
     
+    // MARK: Init
     override func viewDidLoad() {
         super.viewDidLoad()
         handleStates()
     }
     
     private func setUpCollectionView() {
-        collectionView.register(UINib.init(nibName: "CharacterListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CharacterListCollectionViewCell")
+        collectionView.register(UINib.init(nibName: Cells.characterListCollectionViewCell.rawValue, bundle: nil), forCellWithReuseIdentifier: Cells.characterListCollectionViewCell.rawValue)
         collectionView.collectionViewLayout = createLayout()
     }
     

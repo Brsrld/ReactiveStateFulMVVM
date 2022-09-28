@@ -8,19 +8,14 @@
 import Foundation
 import UIKit
 
-public final class CharacterDetailBuilder: NSObject, Buildable {
-    let characterDetail:Result
-    
-    init(characterDetail:Result) {
-        self.characterDetail = characterDetail
-    }
-    
-    public func build() -> UIViewController {
+enum CharacterDetailBuilder {
+    static func build(characterDetail: Result) -> UIViewController {
         guard let viewController = UIStoryboard.instantiateViewController(.characterDetail, CharacterDetailViewController.self) else {
             fatalError("Cannot be instantiated")
         }
         
-        viewController.viewModel = CharacterDetailViewModel(characterDetail: characterDetail)
+        let viewModel = CharacterDetailViewModel(characterDetail: characterDetail)
+        viewController.viewModel = viewModel
         
         return viewController
     }

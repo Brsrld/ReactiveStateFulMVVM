@@ -7,20 +7,17 @@
 
 import UIKit
 
-public final class CharacterListBuilder: NSObject, Buildable {
-    let router: RouterProtocol
-    
-    init(router:RouterProtocol) {
-        self.router = router
-    }
-    
-    public func build() -> UIViewController {
+enum CharacterListBuilder {
+    static func build(coordinator: Coordinator) -> UIViewController {
         guard let viewController = UIStoryboard.instantiateViewController(.characterList, CharacterListViewController.self) else {
             fatalError("Cannot be instantiated")
         }
+
         let service: ServiceGeneratorProtocol = ServiceGenerator()
-        viewController.viewModel = CharacterListViewModel(service: service,router: router)
+        let viewModel = CharacterListViewModel(service: service, coordinator: coordinator)
         
-        return UINavigationController(rootViewController: viewController)
+        viewController.viewModel = viewModel
+        
+        return viewController
     }
 }

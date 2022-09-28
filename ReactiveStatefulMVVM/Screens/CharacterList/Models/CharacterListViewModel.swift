@@ -9,20 +9,20 @@ import Foundation
 import Combine
 
 
-final class CharacterListViewModel {
-    
+final class CharacterListViewModel: Coordinating {
     private let service: ServiceGeneratorProtocol
-    private let router: RouterProtocol
     private var bindings = Set<AnyCancellable>()
     
     @Published private(set) var characters: Characters?
     @Published private(set) var state: CharacterListState = .ready
     
+    var coordinator: Coordinator?
+    
     enum Section { case character }
     
-    init(service: ServiceGeneratorProtocol,router: RouterProtocol) {
+    init(service: ServiceGeneratorProtocol,coordinator: Coordinator?) {
         self.service = service
-        self.router = router
+        self.coordinator = coordinator
     }
     
     func getCharacters() {
@@ -46,9 +46,9 @@ final class CharacterListViewModel {
 
 extension CharacterListViewModel: CharacterCollectionViewDataModelOutput {
     func onDidSelect(indexPath: IndexPath) {
-        guard let item = characters?.results else { return }
-        let coordinator = CharacterDetailCoordinator(router: router, characterDetail: item[indexPath.row])
-        coordinator.present(animated: true, completion: nil)
+        guard let item = self.characters?.results?[indexPath.item] else { return }
+        coordinator?.eventOccurred(with: .goToDetail,
+                                   item: item)
     }
     
     func onWillDisplay(indexPath: IndexPath) {

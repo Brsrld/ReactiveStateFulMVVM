@@ -45,13 +45,13 @@ class CharacterDetailViewController: UIViewController {
             characterImage.kf.setImage(with: URL(string: imageUrl))
         }
         
-        nameLabel.text = viewModel?.characterDetail.name
-        speciesLabel.text = viewModel?.characterDetail.species?.rawValue
-        genderLabel.text = viewModel?.characterDetail.gender?.rawValue
-        originLabel.text = viewModel?.characterDetail.origin?.name
-        locationLabel.text = viewModel?.characterDetail.location?.name
+        nameLabel.text = viewModel.characterDetail.name
+        speciesLabel.text = viewModel.characterDetail.species?.rawValue
+        genderLabel.text = viewModel.characterDetail.gender?.rawValue
+        originLabel.text = viewModel.characterDetail.origin?.name
+        locationLabel.text = viewModel.characterDetail.location?.name
         
-        switch viewModel?.characterDetail.status {
+        switch viewModel.characterDetail.status {
         case .unknown:
             view.backgroundColor = .gray
         case .alive:
