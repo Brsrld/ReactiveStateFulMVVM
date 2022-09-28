@@ -12,10 +12,11 @@ class CharacterListViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet weak var indicatorView: UIView!
-    
-    public var viewModel: CharacterListViewModel!
+
     private var bindings = Set<AnyCancellable>()
     private var characterCollectionViewDataModel: CharacterCollectionViewDataModel?
+    public var viewModel: CharacterListViewModel!
+    var coordinator: Coordinator?
     
     // MARK: Init
     override func viewDidLoad() {
@@ -56,6 +57,7 @@ class CharacterListViewController: UIViewController {
             .store(in: &bindings)
         
     }
+    
     private func visibility(condition:Bool) {
         collectionView.isHidden = condition
         indicatorView.isHidden = !condition
@@ -64,7 +66,7 @@ class CharacterListViewController: UIViewController {
     private func configureDataSource() {
         characterCollectionViewDataModel = CharacterCollectionViewDataModel(
             collectionView: collectionView,
-            output: self.viewModel
+            output: self
         )
         characterCollectionViewDataModel?.configure()
     }
@@ -94,6 +96,22 @@ class CharacterListViewController: UIViewController {
                                                         trailing: inset)
         
         return UICollectionViewCompositionalLayout(section: section)
+    }
+}
+
+extension CharacterListViewController:CharacterCollectionViewDataModelOutput {
+    func onDidSelect(indexPath: IndexPath) {
+        guard let item = self.viewModel.characters?.results?[indexPath.item] else { return }
+        coordinator?.eventOccurred(with: .goToDetail,
+                                   item: item)
+    }
+    
+    func onWillDisplay(indexPath: IndexPath) {
+        //        if indexPath.item == (launchs.count - Constant.LastItemCountofStartPagination)
+        //            && !isPaginating {
+        //            self.offset += launchs.count
+        //            getLaunches()
+        //            self.isPaginating = true
     }
 }
 

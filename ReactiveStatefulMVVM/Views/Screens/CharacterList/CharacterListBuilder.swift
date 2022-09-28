@@ -17,6 +17,7 @@ enum CharacterListBuilder {
         let viewModel = CharacterListViewModel(service: service, coordinator: coordinator)
         
         viewController.viewModel = viewModel
+        viewController.coordinator = coordinator
         
         return viewController
     }

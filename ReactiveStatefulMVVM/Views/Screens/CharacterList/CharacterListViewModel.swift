@@ -9,13 +9,13 @@ import Foundation
 import Combine
 
 
-final class CharacterListViewModel: Coordinating {
+final class CharacterListViewModel {
     private let service: ServiceGeneratorProtocol
     private var bindings = Set<AnyCancellable>()
     
     @Published private(set) var characters: Characters?
     @Published private(set) var state: CharacterListState = .ready
-    
+   
     var coordinator: Coordinator?
     
     enum Section { case character }
@@ -41,22 +41,6 @@ final class CharacterListViewModel: Coordinating {
                 self?.characters = response
             }
             .store(in: &bindings)
-    }
-}
-
-extension CharacterListViewModel: CharacterCollectionViewDataModelOutput {
-    func onDidSelect(indexPath: IndexPath) {
-        guard let item = self.characters?.results?[indexPath.item] else { return }
-        coordinator?.eventOccurred(with: .goToDetail,
-                                   item: item)
-    }
-    
-    func onWillDisplay(indexPath: IndexPath) {
-        //        if indexPath.item == (launchs.count - Constant.LastItemCountofStartPagination)
-        //            && !isPaginating {
-        //            self.offset += launchs.count
-        //            getLaunches()
-        //            self.isPaginating = true
     }
 }
 

@@ -153,7 +153,7 @@
 		550C4D9628E1AF9A0002DDC4 /* ReactiveStatefulMVVM */ = {
 			isa = PBXGroup;
 			children = (
-				550C4DD828E1C76A0002DDC4 /* Screens */,
+				550C4DD828E1C76A0002DDC4 /* Views */,
 				550C4DC828E1AFBF0002DDC4 /* Network */,
 				550C4DC728E1AFAA0002DDC4 /* Core */,
 				550C4DA028E1AF9B0002DDC4 /* Assets.xcassets */,
@@ -182,11 +182,10 @@
 		550C4DC728E1AFAA0002DDC4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				5528C67B28E47EBD00D11D0C /* ViewIdentifiers */,
 				55453EC728E300F9008BD3F0 /* Extensions */,
 				55453EBB28E2FE5E008BD3F0 /* Coordinator */,
 				550C4DE428E1C83C0002DDC4 /* BaseFiles */,
-				55453EC528E300CF008BD3F0 /* Storyboards.swift */,
-				5528C67928E47D7100D11D0C /* Cells.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -218,14 +217,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		550C4DD828E1C76A0002DDC4 /* Screens */ = {
+		550C4DD828E1C76A0002DDC4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5528C67C28E47F4200D11D0C /* Screens */,
 				55453ECF28E30F43008BD3F0 /* Cells */,
-				5528C66528E45B5200D11D0C /* CharacterDetail */,
-				550C4DF328E1CA1C0002DDC4 /* CharacterList */,
 			);
-			path = Screens;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		550C4DE428E1C83C0002DDC4 /* BaseFiles */ = {
@@ -243,9 +241,12 @@
 		550C4DF328E1CA1C0002DDC4 /* CharacterList */ = {
 			isa = PBXGroup;
 			children = (
-				55453ED328E31137008BD3F0 /* Coordinators */,
-				55453ED228E31124008BD3F0 /* Models */,
-				55453ED128E31114008BD3F0 /* View */,
+				55453EC328E2FFF6008BD3F0 /* CharacterListBuilder.swift */,
+				550C4DDD28E1C8010002DDC4 /* CharacterListState.swift */,
+				550C4DE228E1C8230002DDC4 /* CharacterListViewModel.swift */,
+				550C4DD928E1C7BA0002DDC4 /* CharacterListViewController.swift */,
+				55453ECA28E301CB008BD3F0 /* CharacterList.storyboard */,
+				55453ED328E31137008BD3F0 /* TableViewDataSource */,
 			);
 			path = CharacterList;
 			sourceTree = "<group>";
@@ -253,37 +254,31 @@
 		5528C66528E45B5200D11D0C /* CharacterDetail */ = {
 			isa = PBXGroup;
 			children = (
-				5528C66628E45B8500D11D0C /* Coordinators */,
-				5528C67028E45C6000D11D0C /* Models */,
-				5528C66B28E45BDF00D11D0C /* View */,
+				5528C66928E45BBC00D11D0C /* CharacterDetailBuilder.swift */,
+				5528C67128E45C7100D11D0C /* CharacterDetailViewModel.swift */,
+				5528C67328E45D3800D11D0C /* CharacterDetailState.swift */,
+				5528C66C28E45BF900D11D0C /* CharacterDetailViewController.swift */,
+				5528C66E28E45C3500D11D0C /* CharacterDetail.storyboard */,
 			);
 			path = CharacterDetail;
 			sourceTree = "<group>";
 		};
-		5528C66628E45B8500D11D0C /* Coordinators */ = {
+		5528C67B28E47EBD00D11D0C /* ViewIdentifiers */ = {
 			isa = PBXGroup;
 			children = (
-				5528C66928E45BBC00D11D0C /* CharacterDetailBuilder.swift */,
+				55453EC528E300CF008BD3F0 /* Storyboards.swift */,
+				5528C67928E47D7100D11D0C /* Cells.swift */,
 			);
-			path = Coordinators;
+			path = ViewIdentifiers;
 			sourceTree = "<group>";
 		};
-		5528C66B28E45BDF00D11D0C /* View */ = {
+		5528C67C28E47F4200D11D0C /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				5528C66C28E45BF900D11D0C /* CharacterDetailViewController.swift */,
-				5528C66E28E45C3500D11D0C /* CharacterDetail.storyboard */,
+				550C4DF328E1CA1C0002DDC4 /* CharacterList */,
+				5528C66528E45B5200D11D0C /* CharacterDetail */,
 			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		5528C67028E45C6000D11D0C /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				5528C67128E45C7100D11D0C /* CharacterDetailViewModel.swift */,
-				5528C67328E45D3800D11D0C /* CharacterDetailState.swift */,
-			);
-			path = Models;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		55453EBB28E2FE5E008BD3F0 /* Coordinator */ = {
@@ -324,31 +319,12 @@
 			path = CharacterListCell;
 			sourceTree = "<group>";
 		};
-		55453ED128E31114008BD3F0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				550C4DD928E1C7BA0002DDC4 /* CharacterListViewController.swift */,
-				55453ECA28E301CB008BD3F0 /* CharacterList.storyboard */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		55453ED228E31124008BD3F0 /* Models */ = {
+		55453ED328E31137008BD3F0 /* TableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
 				5569846628E3129A00AD2351 /* CharacterTableViewDataModel.swift */,
-				550C4DDD28E1C8010002DDC4 /* CharacterListState.swift */,
-				550C4DE228E1C8230002DDC4 /* CharacterListViewModel.swift */,
 			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		55453ED328E31137008BD3F0 /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-				55453EC328E2FFF6008BD3F0 /* CharacterListBuilder.swift */,
-			);
-			path = Coordinators;
+			path = TableViewDataSource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
