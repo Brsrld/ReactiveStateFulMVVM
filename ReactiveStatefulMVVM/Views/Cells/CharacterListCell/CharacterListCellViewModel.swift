@@ -23,12 +23,12 @@ struct CharacterListCellViewModel {
         return character?.name ?? ""
     }
     
-    var characterSpecies: Species {
-        return character?.species ?? .human
+    var characterSpecies: String {
+        return character?.species ?? ""
     }
     
-    var characterGender: Gender {
-        return character?.gender ?? .unknown
+    var characterGender: String {
+        return character?.gender ?? ""
     }
     
     var characterStatus: Status {

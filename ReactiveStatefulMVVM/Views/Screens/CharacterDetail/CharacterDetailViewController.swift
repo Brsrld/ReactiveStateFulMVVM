@@ -46,8 +46,8 @@ class CharacterDetailViewController: UIViewController {
         }
         
         nameLabel.text = viewModel.characterDetail.name
-        speciesLabel.text = viewModel.characterDetail.species?.rawValue
-        genderLabel.text = viewModel.characterDetail.gender?.rawValue
+        speciesLabel.text = viewModel.characterDetail.species
+        genderLabel.text = viewModel.characterDetail.gender
         originLabel.text = viewModel.characterDetail.origin?.name
         locationLabel.text = viewModel.characterDetail.location?.name
         

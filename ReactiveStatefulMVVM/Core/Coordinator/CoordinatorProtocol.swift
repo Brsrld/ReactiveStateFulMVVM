@@ -18,6 +18,6 @@ protocol Coordinating {
 protocol CoordinatorProtocol {
     var navigationController: UINavigationController? { get set }
     var parentCoordinator: CoordinatorProtocol? { get set }
-    func eventOccurred(with type: Event, item: Result)
+    func eventOccurred(with viewController: UIViewController)
     func start()
 }

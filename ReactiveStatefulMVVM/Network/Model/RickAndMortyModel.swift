@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Characters
 struct Characters: Codable,Hashable {
-    let info: Info?
+    var info: Info?
     var results: [Result]?
     
     static func == (lhs: Characters, rhs: Characters) -> Bool {
@@ -34,9 +34,9 @@ struct Result: Codable,Hashable {
     let id: Int?
     let name: String?
     let status: Status?
-    let species: Species?
+    let species: String?
     let type: String?
-    let gender: Gender?
+    let gender: String?
     let origin, location: Location?
     let image: String?
     let episode: [String]?
@@ -51,21 +51,10 @@ struct Result: Codable,Hashable {
     }
 }
 
-enum Gender: String, Codable {
-    case female = "Female"
-    case male = "Male"
-    case unknown = "unknown"
-}
-
 // MARK: - Location
 struct Location: Codable {
     let name: String?
     let url: String?
-}
-
-enum Species: String, Codable {
-    case alien = "Alien"
-    case human = "Human"
 }
 
 enum Status: String, Codable {

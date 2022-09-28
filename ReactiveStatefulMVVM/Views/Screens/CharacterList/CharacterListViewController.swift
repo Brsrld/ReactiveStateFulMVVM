@@ -46,7 +46,7 @@ class CharacterListViewController: UIViewController {
             case .error(let errorString):
                 self?.showError(errorString)
             case .ready:
-                self?.viewModel.getCharacters()
+                self?.viewModel.initialize()
                 self?.setUpCollectionView()
                 self?.configureDataSource()
             }
@@ -102,16 +102,12 @@ class CharacterListViewController: UIViewController {
 extension CharacterListViewController:CharacterCollectionViewDataModelOutput {
     func onDidSelect(indexPath: IndexPath) {
         guard let item = self.viewModel.characters?.results?[indexPath.item] else { return }
-        coordinator?.eventOccurred(with: .goToDetail,
-                                   item: item)
+        let vc = CharacterDetailBuilder.build(characterDetail: item)
+        coordinator?.eventOccurred(with: vc)
     }
     
     func onWillDisplay(indexPath: IndexPath) {
-        //        if indexPath.item == (launchs.count - Constant.LastItemCountofStartPagination)
-        //            && !isPaginating {
-        //            self.offset += launchs.count
-        //            getLaunches()
-        //            self.isPaginating = true
+        self.viewModel.doPagination(indexPath: indexPath)
     }
 }
 

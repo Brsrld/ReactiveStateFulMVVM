@@ -21,11 +21,8 @@ class Coordinator: CoordinatorProtocol {
         navigationController?.setViewControllers([vc], animated: false)
     }
 
-    func eventOccurred(with type: Event, item: Result) {
-        switch type {
-        case .goToDetail:
-            navigationController?.pushViewController(CharacterDetailBuilder.build(characterDetail: item),
-                                                     animated: true)
-        }
+    func eventOccurred(with viewController: UIViewController) {
+        navigationController?.pushViewController(viewController,
+                                                 animated: true)
     }
 }
