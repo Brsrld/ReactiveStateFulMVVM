@@ -17,6 +17,8 @@ class CharacterDetailViewController: UIViewController {
     @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var originLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var bottomStackView: UIStackView!
+    @IBOutlet weak var transparentImage: UIImageView!
     
     public var viewModel: CharacterDetailViewModel!
     private var bindings = Set<AnyCancellable>()
@@ -31,6 +33,7 @@ class CharacterDetailViewController: UIViewController {
         let stateValueHandler: (CharacterDetailState) -> Void = { [weak self] state in
             switch state {
             case .ready:
+                self?.setupUI()
                 self?.fillContent()
             }
         }
@@ -41,13 +44,34 @@ class CharacterDetailViewController: UIViewController {
         
     }
     
+    private func setupUI() {
+        characterImage.layer.cornerRadius = 100
+        characterImage.clipsToBounds = true
+        characterImage.layer.borderWidth = 10
+        transparentImage.isOpaque = false
+        transparentImage.alpha = 0.2
+        animationLabel(label: nameLabel)
+    }
+    
+    private func animationLabel(label:UILabel) {
+        label.text = ""
+        var charIndex = 0
+        guard let titleText = viewModel.characterDetail.name else { return }
+        for letter in titleText {
+            Timer.scheduledTimer(withTimeInterval: 0.15 * Double(charIndex), repeats: false) { (timer) in
+                label.text?.append(letter)
+            }
+            charIndex += 1
+        }
+    }
+    
     // MARK: Functions
     private func fillContent() {
         if let imageUrl = viewModel.characterDetail.image{
             characterImage.kf.setImage(with: URL(string: imageUrl))
+            transparentImage.kf.setImage(with: URL(string: imageUrl))
         }
         
-        nameLabel.text = viewModel.characterDetail.name
         speciesLabel.text = viewModel.characterDetail.species
         genderLabel.text = viewModel.characterDetail.gender
         originLabel.text = viewModel.characterDetail.origin?.name
@@ -55,13 +79,17 @@ class CharacterDetailViewController: UIViewController {
         
         switch viewModel.characterDetail.status {
         case .unknown:
-            view.backgroundColor = .gray
+            characterImage.layer.borderColor = UIColor.lightGray.cgColor
+            nameLabel.textColor = .lightGray
         case .alive:
-            view.backgroundColor = .green
+            characterImage.layer.borderColor = UIColor.green.cgColor
+            nameLabel.textColor = .systemGreen
         case .dead:
-            view.backgroundColor = .red
+            characterImage.layer.borderColor = UIColor.red.cgColor
+            nameLabel.textColor = .red
         case .none:
-            view.backgroundColor = .white
+            characterImage.layer.borderColor = UIColor.white.cgColor
+            nameLabel.textColor = .black
         }
     }
 }

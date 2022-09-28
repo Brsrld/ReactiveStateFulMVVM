@@ -27,9 +27,11 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
     
     private func fillContent() {
         characterImage.kf.setImage(with: viewModel?.imageURl)
+        characterImage.clipsToBounds = true
+        characterImage.layer.cornerRadius = 8
         nameLabel.text = viewModel?.characterName
-        
         contentView.layer.cornerRadius = 8
+        
         switch viewModel?.characterStatus {
         case .unknown:
             contentView.backgroundColor = .gray
