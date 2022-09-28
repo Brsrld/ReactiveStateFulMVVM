@@ -7,8 +7,8 @@
 
 import UIKit
 
-typealias DataSource = UICollectionViewDiffableDataSource< CharacterListViewModel.Section, Characters>
-typealias Snapshot = NSDiffableDataSourceSnapshot<CharacterListViewModel.Section, Characters>
+typealias DataSource = UICollectionViewDiffableDataSource< CharacterListViewModel.Section, Result>
+typealias Snapshot = NSDiffableDataSourceSnapshot<CharacterListViewModel.Section, Result>
 
 protocol CharacterCollectionViewDataModelOutput {
     func onDidSelect(indexPath: IndexPath)
@@ -37,11 +37,10 @@ final class CharacterCollectionViewDataModel: NSObject {
     }
     
     func updateSections(characters: Characters?) {
-        guard let characters = characters else { return }
+        guard let characters = characters?.results else { return }
         var snapshot = Snapshot()
         snapshot.appendSections([.character])
-        snapshot.appendItems([characters])
-        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        snapshot.appendItems(characters)
         dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
@@ -55,8 +54,7 @@ final class CharacterCollectionViewDataModel: NSObject {
                     withReuseIdentifier: CharacterListCollectionViewCell.reuseIdentifier,
                     for: indexPath
                 ) as? CharacterListCollectionViewCell
-                guard let item = character.results?[indexPath.row] else { return UICollectionViewCell()}
-                cell?.configureCell(viewModel: CharacterListCellViewModel(character: item))
+                cell?.configureCell(viewModel: CharacterListCellViewModel(character: character))
                 return cell
             })
     }

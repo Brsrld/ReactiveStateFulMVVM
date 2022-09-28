@@ -11,6 +11,7 @@ import Combine
 class CharacterListViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet weak var indicatorView: UIView!
     
     public var viewModel: CharacterListViewModel!
     private var bindings = Set<AnyCancellable>()
@@ -18,18 +19,15 @@ class CharacterListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.getLaunches()
-        setUpCollectionView()
-        configureDataSource()
-        setUpBinding()
+        handleStates()
     }
     
     private func setUpCollectionView() {
-        collectionView.register(CharacterListCollectionViewCell.self,
-                                            forCellWithReuseIdentifier: CharacterListCollectionViewCell.reuseIdentifier)
+        collectionView.register(UINib.init(nibName: "CharacterListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CharacterListCollectionViewCell")
+        collectionView.collectionViewLayout = createLayout()
     }
     
-    private func setUpBinding() {
+    private func handleStates() {
         viewModel.$characters
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
@@ -40,13 +38,15 @@ class CharacterListViewController: UIViewController {
         let stateValueHandler: (CharacterListState) -> Void = { [weak self] state in
             switch state {
             case .loading:
-                print("Loading")
+                self?.visibility(condition: true)
             case .finishedLoading:
-                self?.collectionView.backgroundColor = .red
+                self?.visibility(condition: false)
             case .error(let errorString):
-                print("finishedLoading")
+                self?.showError(errorString)
             case .ready:
-                print("ready")
+                self?.viewModel.getCharacters()
+                self?.setUpCollectionView()
+                self?.configureDataSource()
             }
         }
         viewModel.$state
@@ -55,6 +55,10 @@ class CharacterListViewController: UIViewController {
             .store(in: &bindings)
         
     }
+    private func visibility(condition:Bool) {
+        collectionView.isHidden = condition
+        indicatorView.isHidden = !condition
+    }
     
     private func configureDataSource() {
         characterCollectionViewDataModel = CharacterCollectionViewDataModel(
@@ -62,6 +66,33 @@ class CharacterListViewController: UIViewController {
             output: self.viewModel
         )
         characterCollectionViewDataModel?.configure()
+    }
+    
+    private func createLayout() -> UICollectionViewLayout {
+        let fraction: CGFloat = 1 / 2
+        let fractionHeight: CGFloat = 1 / 3.5
+        let inset: CGFloat = 5
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fraction),
+                                              heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: inset,
+                                                     leading: inset,
+                                                     bottom: inset,
+                                                     trailing: inset)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(fractionHeight))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: inset,
+                                                        leading: inset,
+                                                        bottom: inset,
+                                                        trailing: inset)
+        
+        return UICollectionViewCompositionalLayout(section: section)
     }
 }
 

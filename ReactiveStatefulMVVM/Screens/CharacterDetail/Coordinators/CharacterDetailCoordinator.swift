@@ -1,21 +1,23 @@
 //
-//  CharacterListCoordinator.swift
+//  CharacterDetailCoordinator.swift
 //  ReactiveStatefulMVVM
 //
-//  Created by Barış ŞARALDI on 26.09.2022.
+//  Created by Barış ŞARALDI on 28.09.2022.
 //
 
 import Foundation
 
-public final class CharacterListCoordinator: Coordinator {
+public final class CharacterDetailCoordinator: Coordinator {
     var router: RouterProtocol
+    let characterDetail:Result
     
-    public init(router: RouterProtocol) {
+    init(router: RouterProtocol, characterDetail:Result) {
         self.router = router
+        self.characterDetail = characterDetail
     }
     
     func present(animated: Bool, completion: (() -> Void)?) {
-        let builder = CharacterListBuilder(router: router)
+        let builder = CharacterDetailBuilder(characterDetail: characterDetail)
         let vc = builder.build()
         router.present(vc, animated: true, completion: nil)
     }

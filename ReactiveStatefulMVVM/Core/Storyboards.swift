@@ -9,4 +9,5 @@ import Foundation
 
 public enum Storyboards: String {
     case characterList = "CharacterList"
+    case characterDetail = "CharacterDetail"
 }

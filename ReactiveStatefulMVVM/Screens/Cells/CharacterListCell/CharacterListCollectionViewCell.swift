@@ -11,8 +11,6 @@ import Kingfisher
 class CharacterListCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var characterImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var speciesLabel: UILabel!
-    @IBOutlet weak var genderLabel: UILabel!
     
     // MARK: Properties
     private var viewModel: CharacterListCellViewModel?
@@ -23,16 +21,14 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
     
     func configureCell(viewModel: CharacterListCellViewModel) {
         self.viewModel = viewModel
-        backgroundColor = .white
         fillContent()
     }
     
     private func fillContent() {
         characterImage.kf.setImage(with: viewModel?.imageURl)
         nameLabel.text = viewModel?.characterName
-        speciesLabel.text = viewModel?.characterSpecies.rawValue
-        genderLabel.text = viewModel?.characterGender.rawValue
         
+        contentView.layer.cornerRadius = 8
         switch viewModel?.characterStatus {
         case .unknown:
             contentView.backgroundColor = .gray

@@ -10,7 +10,7 @@ import Foundation
 // MARK: - Characters
 struct Characters: Codable,Hashable {
     let info: Info?
-    let results: [Result]?
+    var results: [Result]?
     
     static func == (lhs: Characters, rhs: Characters) -> Bool {
         return lhs.results == rhs.results && lhs.info == rhs.info
@@ -26,6 +26,7 @@ struct Characters: Codable,Hashable {
 struct Info: Codable,Hashable {
     let count, pages: Int?
     let next: String?
+    let prev: String?
 }
 
 // MARK: - Result

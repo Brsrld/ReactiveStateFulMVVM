@@ -9,9 +9,10 @@ import Foundation
 import Combine
 
 
-final class CharacterListViewModel: ObservableObject {
+final class CharacterListViewModel {
     
     private let service: ServiceGeneratorProtocol
+    private let router: RouterProtocol
     private var bindings = Set<AnyCancellable>()
     
     @Published private(set) var characters: Characters?
@@ -19,11 +20,12 @@ final class CharacterListViewModel: ObservableObject {
     
     enum Section { case character }
     
-    init(service: ServiceGeneratorProtocol) {
+    init(service: ServiceGeneratorProtocol,router: RouterProtocol) {
         self.service = service
+        self.router = router
     }
     
-    func getLaunches() {
+    func getCharacters() {
         let url = "https://rickandmortyapi.com/api/character"
         let request = NetworkRequest(url: url, httpMethod: .GET)
         state = .loading
@@ -44,8 +46,9 @@ final class CharacterListViewModel: ObservableObject {
 
 extension CharacterListViewModel: CharacterCollectionViewDataModelOutput {
     func onDidSelect(indexPath: IndexPath) {
-        //        coordinator?.eventOccurred(with: .goToDetail,
-        //                                   item: self.launchs[indexPath.item])
+        guard let item = characters?.results else { return }
+        let coordinator = CharacterDetailCoordinator(router: router, characterDetail: item[indexPath.row])
+        coordinator.present(animated: true, completion: nil)
     }
     
     func onWillDisplay(indexPath: IndexPath) {
