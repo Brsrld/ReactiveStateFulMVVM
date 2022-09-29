@@ -7,11 +7,7 @@
 
 import UIKit
 
-// MARK: Protocols
-protocol Coordinating {
-    var coordinator: Coordinator? { get set }
-}
-
+// MARK: Protocol
 protocol CoordinatorProtocol {
     var navigationController: UINavigationController? { get set }
     var parentCoordinator: CoordinatorProtocol? { get set }

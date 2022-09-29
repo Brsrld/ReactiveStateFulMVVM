@@ -26,13 +26,6 @@ class CharacterListViewController: UIViewController {
     
     // MARK: States
     private func handleStates() {
-        viewModel.$characters
-            .receive(on: RunLoop.main)
-            .sink { [weak self] _ in
-                self?.characterCollectionViewDataModel?.updateSections(characters: self?.viewModel.characters)
-            }
-            .store(in: &bindings)
-        
         let stateValueHandler: (CharacterListState) -> Void = { [weak self] state in
             switch state {
             case .loading:
@@ -42,6 +35,7 @@ class CharacterListViewController: UIViewController {
             case .error(let errorString):
                 self?.showError(errorString)
             case .ready:
+                self?.updateSections()
                 self?.viewModel.initialize()
                 self?.setUpCollectionView()
                 self?.configureDataSource()
@@ -58,6 +52,15 @@ class CharacterListViewController: UIViewController {
     private func setUpCollectionView() {
         collectionView.register(UINib.init(nibName: Cells.characterListCollectionViewCell.rawValue, bundle: nil), forCellWithReuseIdentifier: Cells.characterListCollectionViewCell.rawValue)
         collectionView.collectionViewLayout = createLayout()
+    }
+    
+    private func updateSections() {
+        viewModel.$characters
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.characterCollectionViewDataModel?.updateSections(characters: self?.viewModel.characters)
+            }
+            .store(in: &bindings)
     }
     
     private func visibility(condition:Bool) {

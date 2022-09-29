@@ -46,6 +46,7 @@ struct Result: Codable,Hashable {
     static func == (lhs: Result, rhs: Result) -> Bool {
         return lhs.id == rhs.id
     }
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
