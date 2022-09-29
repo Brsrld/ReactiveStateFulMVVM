@@ -17,13 +17,11 @@ final class CharacterListViewModel {
     @Published private(set) var characters: Characters?
     @Published private(set) var state: CharacterListState = .ready
     
-    var coordinator: Coordinator?
     enum Section { case character }
     
     // MARK: Init
-    init(service: ServiceGeneratorProtocol,coordinator: Coordinator?) {
+    init(service: ServiceGeneratorProtocol) {
         self.service = service
-        self.coordinator = coordinator
     }
     
     // MARK: Functions
