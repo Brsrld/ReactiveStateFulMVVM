@@ -29,6 +29,8 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
         characterImage.clipsToBounds = true
         characterImage.layer.cornerRadius = 8
         characterImage.image = viewModel?.getImage(imageView: characterImage)
+        nameLabel.text = viewModel?.characterDetail?.name
+        contentView.layer.cornerRadius = 8
         
         switch viewModel?.characterDetail?.status {
         case .unknown:
@@ -40,8 +42,5 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
         case .none:
             contentView.backgroundColor = .white
         }
-        
-        nameLabel.text = viewModel?.characterDetail?.name
-        contentView.layer.cornerRadius = 8
     }
 }

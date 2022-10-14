@@ -12,7 +12,7 @@ class CharacterListViewController: UIViewController {
     // MARK: Properties
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet weak var indicatorView: UIView!
-
+    
     private var bindings = Set<AnyCancellable>()
     private var characterCollectionViewDataModel: CharacterCollectionViewDataModel?
     public var viewModel: CharacterListViewModel!

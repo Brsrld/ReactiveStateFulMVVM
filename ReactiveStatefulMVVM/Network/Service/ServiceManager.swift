@@ -54,7 +54,7 @@ final class ServiceManager: ServiceManagerProtocol {
         return URLSession.shared.dataTaskPublisher(for: url)
             .map { (data, response) -> UIImage? in return UIImage(data: data) }
             .catch { error in return Just(nil) }
-            .handleEvents(receiveOutput: {[unowned self] image in
+            .handleEvents(receiveOutput: { image in
                 guard let image = image else { return }
                 cache[url] = image
             })

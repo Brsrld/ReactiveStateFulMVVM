@@ -12,7 +12,7 @@ enum CharacterListBuilder {
         guard let viewController = UIStoryboard.instantiateViewController(.characterList, CharacterListViewController.self) else {
             fatalError("Cannot be instantiated")
         }
-
+        
         let service: ServiceGeneratorProtocol = ServiceGenerator()
         let viewModel = CharacterListViewModel(service: service)
         

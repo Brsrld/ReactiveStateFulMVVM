@@ -42,7 +42,7 @@ class CharacterDetailViewController: UIViewController {
             .store(in: &bindings)
         
     }
-
+    
     private func setupUI() {
         characterImage.layer.cornerRadius = 100
         characterImage.clipsToBounds = true
