@@ -7,7 +7,6 @@
 
 import UIKit
 import Combine
-import Kingfisher
 
 class CharacterDetailViewController: UIViewController {
     // MARK: Properties
@@ -43,7 +42,7 @@ class CharacterDetailViewController: UIViewController {
             .store(in: &bindings)
         
     }
-    
+
     private func setupUI() {
         characterImage.layer.cornerRadius = 100
         characterImage.clipsToBounds = true
@@ -67,10 +66,8 @@ class CharacterDetailViewController: UIViewController {
     
     // MARK: Functions
     private func fillContent() {
-        if let imageUrl = viewModel.characterDetail.image{
-            characterImage.kf.setImage(with: URL(string: imageUrl))
-            transparentImage.kf.setImage(with: URL(string: imageUrl))
-        }
+        characterImage.image = viewModel.getImage(imageView: characterImage)
+        transparentImage.image = viewModel.getImage(imageView: transparentImage)
         
         speciesLabel.text = viewModel.characterDetail.species
         genderLabel.text = viewModel.characterDetail.gender

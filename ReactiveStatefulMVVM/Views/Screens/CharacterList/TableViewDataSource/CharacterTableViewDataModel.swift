@@ -32,8 +32,8 @@ final class CharacterCollectionViewDataModel: NSObject {
     }
     
     // MARK: Public Func
-    func configure() {
-        configureDataSource()
+    func configure(service:ServiceGeneratorProtocol) {
+        configureDataSource(service:service)
     }
     
     func updateSections(characters: Characters?) {
@@ -45,7 +45,7 @@ final class CharacterCollectionViewDataModel: NSObject {
     }
     
     // MARK: Private Func
-    private func configureDataSource() {
+    private func configureDataSource(service:ServiceGeneratorProtocol) {
         collectionView.delegate = self
         dataSource = DataSource(
             collectionView: collectionView,
@@ -54,7 +54,7 @@ final class CharacterCollectionViewDataModel: NSObject {
                     withReuseIdentifier: CharacterListCollectionViewCell.reuseIdentifier,
                     for: indexPath
                 ) as? CharacterListCollectionViewCell
-                cell?.configureCell(viewModel: CharacterListCellViewModel(character: character))
+                cell?.configureCell(viewModel: CharacterListCellViewModel(characterDetail: character, service:service))
                 return cell
             })
     }

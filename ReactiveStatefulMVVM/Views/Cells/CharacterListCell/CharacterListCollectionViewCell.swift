@@ -6,13 +6,13 @@
 //
 
 import UIKit
-import Kingfisher
+import Combine
 
 class CharacterListCollectionViewCell: UICollectionViewCell {
     // MARK: Properties
     @IBOutlet weak var characterImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-
+    
     private var viewModel: CharacterListCellViewModel?
     
     // MARK: Functions
@@ -24,15 +24,13 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
         self.viewModel = viewModel
         fillContent()
     }
-    
+        
     private func fillContent() {
-        characterImage.kf.setImage(with: viewModel?.imageURl)
         characterImage.clipsToBounds = true
         characterImage.layer.cornerRadius = 8
-        nameLabel.text = viewModel?.characterName
-        contentView.layer.cornerRadius = 8
+        characterImage.image = viewModel?.getImage(imageView: characterImage)
         
-        switch viewModel?.characterStatus {
+        switch viewModel?.characterDetail?.status {
         case .unknown:
             contentView.backgroundColor = .gray
         case .alive:
@@ -42,5 +40,8 @@ class CharacterListCollectionViewCell: UICollectionViewCell {
         case .none:
             contentView.backgroundColor = .white
         }
+        
+        nameLabel.text = viewModel?.characterDetail?.name
+        contentView.layer.cornerRadius = 8
     }
 }

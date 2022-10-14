@@ -7,11 +7,13 @@
 
 import Foundation
 import Combine
+import UIKit
 
 // MARK: Protocol
 protocol ServiceManagerProtocol {
     func request<T>(_ req: NetworkRequest) -> AnyPublisher<T, NetworkError>
     where T: Decodable, T: Encodable
+    func loadImage(from url: URL, cache: ImageCacheType, backgroundQueue: OperationQueue) -> AnyPublisher<UIImage?, Never>
 }
 
 final class ServiceManager: ServiceManagerProtocol {
@@ -45,4 +47,19 @@ final class ServiceManager: ServiceManagerProtocol {
             .eraseToAnyPublisher()
     }
     
+    func loadImage(from url: URL, cache: ImageCacheType, backgroundQueue: OperationQueue) -> AnyPublisher<UIImage?, Never> {
+        if let image = cache[url] {
+            return Just(image).eraseToAnyPublisher()
+        }
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map { (data, response) -> UIImage? in return UIImage(data: data) }
+            .catch { error in return Just(nil) }
+            .handleEvents(receiveOutput: {[unowned self] image in
+                guard let image = image else { return }
+                cache[url] = image
+            })
+            .subscribe(on: backgroundQueue)
+            .receive(on: RunLoop.main)
+            .eraseToAnyPublisher()
+    }
 }

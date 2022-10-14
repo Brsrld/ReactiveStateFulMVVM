@@ -5,34 +5,35 @@
 //  Created by Barış ŞARALDI on 27.09.2022.
 //
 
-import Foundation
+import UIKit
+import Combine
 
-struct CharacterListCellViewModel {
+final class CharacterListCellViewModel {
     // MARK: Properties
-    private let character: Result?
-    
-    var imageURl: URL? {
-        return URL(string: character?.image ?? "")
-    }
-    
-    var characterName: String {
-        return character?.name ?? ""
-    }
-    
-    var characterSpecies: String {
-        return character?.species ?? ""
-    }
-    
-    var characterGender: String {
-        return character?.gender ?? ""
-    }
-    
-    var characterStatus: Status {
-        return character?.status ?? .unknown
-    }
+    let characterDetail: Result?
+    private var cancellable: AnyCancellable?
+    private let service: ServiceGeneratorProtocol
     
     // MARK: Init
-    init(character: Result) {
-        self.character = character
+    init(characterDetail: Result,service: ServiceGeneratorProtocol) {
+        self.characterDetail = characterDetail
+        self.service = service
+    }
+    
+    private func loadImage(imageView:UIImageView) -> AnyPublisher<UIImage?, Never> {
+        let url = URL(string: characterDetail?.image ?? "")
+        return Just(characterDetail?.image)
+            .flatMap({ imageView -> AnyPublisher<UIImage?, Never> in
+                return self.service.getImages(from: url!)
+            })
+            .eraseToAnyPublisher()
+    }
+    
+    func getImage(imageView:UIImageView) -> UIImage? {
+        var result:UIImage?
+        cancellable = loadImage(imageView: imageView).sink { image in
+            result = image
+        }
+        return result
     }
 }

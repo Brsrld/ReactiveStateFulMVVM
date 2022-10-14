@@ -14,7 +14,7 @@ enum CharacterListBuilder {
         }
 
         let service: ServiceGeneratorProtocol = ServiceGenerator()
-        let viewModel = CharacterListViewModel(service: service, coordinator: coordinator)
+        let viewModel = CharacterListViewModel(service: service)
         
         viewController.viewModel = viewModel
         viewController.coordinator = coordinator

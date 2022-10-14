@@ -18,6 +18,7 @@ class CharacterListViewController: UIViewController {
     public var viewModel: CharacterListViewModel!
     var coordinator: Coordinator?
     
+    
     // MARK: Init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +74,7 @@ class CharacterListViewController: UIViewController {
             collectionView: collectionView,
             output: self
         )
-        characterCollectionViewDataModel?.configure()
+        characterCollectionViewDataModel?.configure(service: viewModel.service)
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -108,7 +109,7 @@ class CharacterListViewController: UIViewController {
 extension CharacterListViewController:CharacterCollectionViewDataModelOutput {
     func onDidSelect(indexPath: IndexPath) {
         guard let item = self.viewModel.characters?.results?[indexPath.item] else { return }
-        let vc = CharacterDetailBuilder.build(characterDetail: item)
+        let vc = CharacterDetailBuilder.build(characterDetail: item, service: viewModel.service)
         coordinator?.eventOccurred(with: vc)
     }
     

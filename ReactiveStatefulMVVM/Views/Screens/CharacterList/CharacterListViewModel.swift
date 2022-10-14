@@ -11,7 +11,7 @@ import Combine
 
 final class CharacterListViewModel {
     // MARK: Properties
-    private let service: ServiceGeneratorProtocol
+    let service: ServiceGeneratorProtocol
     private var bindings = Set<AnyCancellable>()
     
     @Published private(set) var characters: Characters?
