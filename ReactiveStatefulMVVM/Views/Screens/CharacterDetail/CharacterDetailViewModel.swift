@@ -22,18 +22,18 @@ final class CharacterDetailViewModel {
         self.service = service
     }
     
-    private func loadImage(imageView:UIImageView) -> AnyPublisher<UIImage?, Never> {
+    private func loadImage() -> AnyPublisher<UIImage?, Never> {
         let url = URL(string: characterDetail.image ?? "")
         return Just(characterDetail.image)
-            .flatMap({ imageView -> AnyPublisher<UIImage?, Never> in
+            .flatMap({ UIImageView -> AnyPublisher<UIImage?, Never> in
                 return self.service.getImages(from: url!)
             })
             .eraseToAnyPublisher()
     }
     
-    func getImage(imageView:UIImageView) -> UIImage? {
+    func getImage() -> UIImage? {
         var result:UIImage?
-        cancellable = loadImage(imageView: imageView).sink { image in
+        cancellable = loadImage().sink { image in
             result = image
         }
         return result

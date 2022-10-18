@@ -52,7 +52,7 @@ class CharacterDetailViewController: UIViewController {
         animationLabel(label: nameLabel)
     }
     
-    private func animationLabel(label:UILabel) {
+    private func animationLabel(label: UILabel) {
         label.text = ""
         var charIndex = 0
         guard let titleText = viewModel.characterDetail.name else { return }
@@ -66,8 +66,8 @@ class CharacterDetailViewController: UIViewController {
     
     // MARK: Functions
     private func fillContent() {
-        characterImage.image = viewModel.getImage(imageView: characterImage)
-        transparentImage.image = viewModel.getImage(imageView: transparentImage)
+        characterImage.image = viewModel.getImage()
+        transparentImage.image = viewModel.getImage()
         
         speciesLabel.text = viewModel.characterDetail.species
         genderLabel.text = viewModel.characterDetail.gender
